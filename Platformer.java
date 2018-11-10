@@ -19,35 +19,97 @@ public class Platformer
     }
 }
 
-class PlatformerPanel extends JPanel implements KeyListener
+class PlatformerPanel extends JPanel implements KeyListener, ActionListener
 {
-
+  private javax.swing.Timer timer;
+  UFO m;        //this is just so we can test some things
+  int velocity1, velocity2, velocity3, velocity4;
+  int maxVelocity;
+  int direction ;
   public PlatformerPanel ()
   {
+    m = new UFO();
+    m.setPosition(300, 50);
+    m.setColor (Color.red);
+    m.setSize(50);
+    direction = 0;
+
+    velocity1 = 0;
+    velocity2 = 0;
+    velocity3 = 0;
+    velocity4 = 0;
+    maxVelocity = 100;
 
     addKeyListener(this);
+    timer = new javax.swing.Timer(10, this);
+    timer.start();
   }
-}
 
-public void paintComponent (Graphics g)
-{
+  public void accelerate (int velocityDirection)
+  {
+    if (velocityDirection != maxVelocity)
+    {
+      velocityDirection++;
+    }
+  }
+  public void stop(int velocityDirection)
+  {
+    if (velocityDirection > 0)
+    {
+      velocityDirection--;
+    }
+  }
 
-  requestFocus();
-}
+  public void paintComponent (Graphics g)
+  {
+  super.paintComponent(g);
+  m.draw(g);
+    requestFocus();
+  }
 
-public void keyPressed (KeyEvent e)
-{
-
-}
-
-
-public void keyReleased (KeyEvent e)
-{
-
-}
+  public void keyPressed (KeyEvent e)
+  {
+    if (e.getKeyChar() == 'w')
+    {
 
 
-public void keyTyped (KeyEvent e)
-{
-  
+    }
+    else if (e.getKeyChar() == 'd')
+    {
+
+    }
+    else if (e.getKeyChar() == 'a')
+    {
+
+    }
+    else if (e.getKeyChar() == 's')
+    {
+
+
+    }
+
+  }
+
+
+  public void keyReleased (KeyEvent e)
+  {
+
+  }
+
+
+  public void keyTyped (KeyEvent e)
+  {
+
+  }
+
+  public void actionPerformed (ActionEvent e)
+  {
+    if (e.getSource() == timer)
+    {
+
+
+    }
+
+    repaint();
+  }
 }
