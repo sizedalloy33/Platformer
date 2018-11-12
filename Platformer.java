@@ -27,7 +27,6 @@ class PlatformerPanel extends JPanel implements KeyListener, ActionListener
   int velocityX, velocityY;
   int maxVelocityU, maxVelocityD, maxVelocityL, maxVelocityR;
   int direction;
-  int step;
   public PlatformerPanel ()
   {
     m = new UFO();
@@ -48,8 +47,6 @@ class PlatformerPanel extends JPanel implements KeyListener, ActionListener
 
     gravityTimer = new javax.swing.Timer(70, this);
     gravityTimer.start();
-    
-    step = 2;
 
     addKeyListener(this);
 
@@ -62,11 +59,32 @@ class PlatformerPanel extends JPanel implements KeyListener, ActionListener
       velocityY = velocityY + 1;
     }
   }
+  public void move(char direction)
+  {
+    if (direction == 'L' && velocityX > -50)
+    {
+      velocityX = velocityX - 10;
+    }
+    else if (direction == 'R' && velocityX < 50)
+    {
+      velocityX = velocityX + 10;
+    }
+    else if (direction == 'S')
+    {
+      if (velocityX > 0)
+      {
+        velocityX--;
+      }
+      else if (velocityX < 0)
+      {
+        velocityX++;
+      }
+    }
+  }
 
   public void paintComponent (Graphics g)
   {
   super.paintComponent(g);
-  if (step == 2)
   m.draw(g);
     requestFocus();
   }
@@ -80,11 +98,11 @@ class PlatformerPanel extends JPanel implements KeyListener, ActionListener
     }
     else if (e.getKeyChar() == 'd')
     {
-
+      move('R');
     }
     else if (e.getKeyChar() == 'a')
     {
-
+      move('L');
     }
     else if (e.getKeyChar() == 's')
     {
@@ -111,6 +129,7 @@ class PlatformerPanel extends JPanel implements KeyListener, ActionListener
     if (e.getSource() == timer)
     {
       m.setPosition(m.getX() + velocityX, m.getY() + velocityY);
+      move('S');
     }
     if(e.getSource() == gravityTimer)
     {
