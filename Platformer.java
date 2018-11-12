@@ -14,8 +14,8 @@ public class Platformer
 	JFrame j = new JFrame ("Platformer");
 	j.setDefaultCloseOperation (JFrame.EXIT_ON_CLOSE);
 	j.getContentPane ().add (new PlatformerPanel (), BorderLayout.CENTER);
-  j.setSize (800, 500);
-  j.setVisible (true);
+  	j.setSize (800, 500);
+  	j.setVisible (true);
     }
 }
 
@@ -25,6 +25,7 @@ class PlatformerPanel extends JPanel implements KeyListener, ActionListener
   UFO m;        //this is just so we can test some things
   int velocity1, velocity2, velocity3, velocity4;
   int maxVelocity;
+  int step;
   int direction ;
   public PlatformerPanel ()
   {
@@ -33,6 +34,8 @@ class PlatformerPanel extends JPanel implements KeyListener, ActionListener
     m.setColor (Color.red);
     m.setSize(50);
     direction = 0;
+
+step = 2;
 
     velocity1 = 0;
     velocity2 = 0;
@@ -63,6 +66,7 @@ class PlatformerPanel extends JPanel implements KeyListener, ActionListener
   public void paintComponent (Graphics g)
   {
   super.paintComponent(g);
+  if (step = 2);
   m.draw(g);
     requestFocus();
   }
