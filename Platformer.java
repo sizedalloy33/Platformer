@@ -14,19 +14,19 @@ public class Platformer
 	JFrame j = new JFrame ("Platformer");
 	j.setDefaultCloseOperation (JFrame.EXIT_ON_CLOSE);
 	j.getContentPane ().add (new PlatformerPanel (), BorderLayout.CENTER);
-  	j.setSize (800, 500);
-  	j.setVisible (true);
+  j.setSize (800, 500);
+  j.setVisible (true);
     }
 }
 
 class PlatformerPanel extends JPanel implements KeyListener, ActionListener
 {
   private javax.swing.Timer timer;
+  private javax.swing.Timer gravityTimer;
   UFO m;        //this is just so we can test some things
-  int velocity1, velocity2, velocity3, velocity4;
-  int maxVelocity;
-  int step;
-  int direction ;
+  int velocityX, velocityY;
+  int maxVelocityU, maxVelocityD, maxVelocityL, maxVelocityR;
+  int direction;
   public PlatformerPanel ()
   {
     m = new UFO();
@@ -35,38 +35,34 @@ class PlatformerPanel extends JPanel implements KeyListener, ActionListener
     m.setSize(50);
     direction = 0;
 
-step = 2;
+    velocityX = 0;
+    velocityY = 0;
+    maxVelocityU = -100;
+    maxVelocityD = 100;
+    maxVelocityL = 100;
+    maxVelocityR = -100;
 
-    velocity1 = 0;
-    velocity2 = 0;
-    velocity3 = 0;
-    velocity4 = 0;
-    maxVelocity = 100;
+    timer = new javax.swing.Timer(20, this);
+    timer.start();
+
+    gravityTimer = new javax.swing.Timer(70, this);
+    gravityTimer.start();
 
     addKeyListener(this);
-    timer = new javax.swing.Timer(10, this);
-    timer.start();
+
   }
 
-  public void accelerate (int velocityDirection)
+  public void gravity ()
   {
-    if (velocityDirection != maxVelocity)
+    if (velocityY < 100)
     {
-      velocityDirection++;
-    }
-  }
-  public void stop(int velocityDirection)
-  {
-    if (velocityDirection > 0)
-    {
-      velocityDirection--;
+      velocityY = velocityY + 1;
     }
   }
 
   public void paintComponent (Graphics g)
   {
   super.paintComponent(g);
-  if (step = 2);
   m.draw(g);
     requestFocus();
   }
@@ -75,7 +71,7 @@ step = 2;
   {
     if (e.getKeyChar() == 'w')
     {
-
+      velocityY = -12;
 
     }
     else if (e.getKeyChar() == 'd')
@@ -89,8 +85,8 @@ step = 2;
     else if (e.getKeyChar() == 's')
     {
 
-
     }
+    repaint();
 
   }
 
@@ -110,8 +106,11 @@ step = 2;
   {
     if (e.getSource() == timer)
     {
-
-
+      m.setPosition(m.getX() + velocityX, m.getY() + velocityY);
+    }
+    if(e.getSource() == gravityTimer)
+    {
+      gravity();
     }
 
     repaint();
