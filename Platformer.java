@@ -27,7 +27,6 @@ class PlatformerPanel extends JPanel implements KeyListener, ActionListener
   int velocityX, velocityY;
   int maxVelocityU, maxVelocityD, maxVelocityL, maxVelocityR;
   int direction;
-  int step;
   public PlatformerPanel ()
   {
     m = new UFO();
@@ -49,46 +48,36 @@ class PlatformerPanel extends JPanel implements KeyListener, ActionListener
     gravityTimer = new javax.swing.Timer(70, this);
     gravityTimer.start();
 
-step = 2;
-
     addKeyListener(this);
 
   }
 
   public void gravity ()
   {
-    if (velocityY < 100)
+    if (velocityY < 50)
     {
       velocityY = velocityY + 1;
     }
   }
   public void move(char direction)
   {
-    if (direction == 'L' && velocityX > -50)
+    if (direction == 'L')
     {
-      velocityX = velocityX - 10;
+      velocityX = -20;
     }
-    else if (direction == 'R' && velocityX < 50)
+    else if (direction == 'R')
     {
-      velocityX = velocityX + 10;
+      velocityX = 20;
     }
     else if (direction == 'S')
     {
-      if (velocityX > 0)
-      {
-        velocityX--;
-      }
-      else if (velocityX < 0)
-      {
-        velocityX++;
-      }
+        velocityX = 0;
     }
   }
 
   public void paintComponent (Graphics g)
   {
   super.paintComponent(g);
-  if (step == 2)
   m.draw(g);
     requestFocus();
   }
@@ -100,7 +89,7 @@ step = 2;
       velocityY = -12;
 
     }
-    else if (e.getKeyChar() == 'd')
+    if (e.getKeyChar() == 'd')
     {
       move('R');
     }
@@ -112,13 +101,18 @@ step = 2;
     {
 
     }
-    repaint();
+
+
 
   }
 
 
   public void keyReleased (KeyEvent e)
   {
+    if (e.getKeyChar() != 'w')
+    {
+      move('S');
+    }
 
   }
 
@@ -132,11 +126,24 @@ step = 2;
   {
     if (e.getSource() == timer)
     {
+      if (m.getY() < 410)
+      {
       m.setPosition(m.getX() + velocityX, m.getY() + velocityY);
-      move('S');
+      }
+      else if (velocityY < 0)
+      {
+        m.setPosition(m.getX() + velocityX, m.getY() + velocityY);
+      }
+      else
+      {
+        m.setPosition(m.getX() + velocityX, m.getY());
+      }
+      //move('S');
+
     }
     if(e.getSource() == gravityTimer)
     {
+
       gravity();
     }
 
