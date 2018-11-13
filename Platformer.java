@@ -42,14 +42,14 @@ class PlatformerPanel extends JPanel implements KeyListener, ActionListener
     maxVelocityD = 100;
     maxVelocityL = 100;
     maxVelocityR = -100;
-
+    
     timer = new javax.swing.Timer(20, this);
     timer.start();
 
     gravityTimer = new javax.swing.Timer(70, this);
     gravityTimer.start();
-
-step = 2;
+    
+    step = 2;
 
     addKeyListener(this);
 
@@ -57,31 +57,24 @@ step = 2;
 
   public void gravity ()
   {
-    if (velocityY < 100)
+    if (velocityY < 50)
     {
       velocityY = velocityY + 1;
     }
   }
   public void move(char direction)
   {
-    if (direction == 'L' && velocityX > -50)
+    if (direction == 'L')
     {
-      velocityX = velocityX - 10;
+      velocityX = -20;
     }
-    else if (direction == 'R' && velocityX < 50)
+    else if (direction == 'R')
     {
-      velocityX = velocityX + 10;
+      velocityX = 20;
     }
     else if (direction == 'S')
     {
-      if (velocityX > 0)
-      {
-        velocityX--;
-      }
-      else if (velocityX < 0)
-      {
-        velocityX++;
-      }
+        velocityX = 0;
     }
   }
 
@@ -100,7 +93,7 @@ step = 2;
       velocityY = -12;
 
     }
-    else if (e.getKeyChar() == 'd')
+    if (e.getKeyChar() == 'd')
     {
       move('R');
     }
@@ -112,13 +105,18 @@ step = 2;
     {
 
     }
-    repaint();
+
+
 
   }
 
 
   public void keyReleased (KeyEvent e)
   {
+    if (e.getKeyChar() != 'w')
+    {
+      move('S');
+    }
 
   }
 
@@ -132,11 +130,24 @@ step = 2;
   {
     if (e.getSource() == timer)
     {
+      if (m.getY() < 410)
+      {
       m.setPosition(m.getX() + velocityX, m.getY() + velocityY);
-      move('S');
+      }
+      else if (velocityY < 0)
+      {
+        m.setPosition(m.getX() + velocityX, m.getY() + velocityY);
+      }
+      else
+      {
+        m.setPosition(m.getX() + velocityX, m.getY());
+      }
+      //move('S');
+
     }
     if(e.getSource() == gravityTimer)
     {
+
       gravity();
     }
 
