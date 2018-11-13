@@ -27,6 +27,7 @@ class PlatformerPanel extends JPanel implements KeyListener, ActionListener
   int velocityX, velocityY;
   int maxVelocityU, maxVelocityD, maxVelocityL, maxVelocityR;
   int direction;
+  int step;
   public PlatformerPanel ()
   {
     m = new UFO();
@@ -41,6 +42,8 @@ class PlatformerPanel extends JPanel implements KeyListener, ActionListener
     maxVelocityD = 100;
     maxVelocityL = 100;
     maxVelocityR = -100;
+    
+    step = 2;
 
     timer = new javax.swing.Timer(20, this);
     timer.start();
@@ -78,6 +81,7 @@ class PlatformerPanel extends JPanel implements KeyListener, ActionListener
   public void paintComponent (Graphics g)
   {
   super.paintComponent(g);
+  if (step == 2);
   m.draw(g);
     requestFocus();
   }
