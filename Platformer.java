@@ -30,6 +30,11 @@ class PlatformerPanel extends JPanel implements KeyListener, ActionListener
   int step;
   public PlatformerPanel ()
   {
+  
+  block = new Block_1 ();
+  block.setHeight (50);
+  block.setPosition (100, 150);
+
     m = new UFO();
     m.setPosition(300, 50);
     m.setColor (Color.red);
@@ -83,6 +88,7 @@ class PlatformerPanel extends JPanel implements KeyListener, ActionListener
   super.paintComponent(g);
   if (step == 2)
   m.draw(g);
+  block.draw(g);
     requestFocus();
   }
 
