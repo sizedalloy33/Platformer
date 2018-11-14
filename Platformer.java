@@ -14,143 +14,157 @@ public class Platformer
 	JFrame j = new JFrame ("Platformer");
 	j.setDefaultCloseOperation (JFrame.EXIT_ON_CLOSE);
 	j.getContentPane ().add (new PlatformerPanel (), BorderLayout.CENTER);
-  j.setSize (800, 500);
-  j.setVisible (true);
+	j.setSize (800, 500);
+	j.setVisible (true);
     }
 }
 
 class PlatformerPanel extends JPanel implements KeyListener, ActionListener
 {
-  private javax.swing.Timer timer;
-  private javax.swing.Timer gravityTimer;
-  UFO m;        //this is just so we can test some things
-  int velocityX, velocityY;
-  int maxVelocityU, maxVelocityD, maxVelocityL, maxVelocityR;
-  int direction;
-  int step;
-  public PlatformerPanel ()
-  {
-    m = new UFO();
-    m.setPosition(300, 50);
-    m.setColor (Color.red);
-    m.setSize(50);
-    direction = 0;
+    private javax.swing.Timer timer;
+    private javax.swing.Timer gravityTimer;
+    UFO m;        //this is just so we can test some things
+    int velocityX, velocityY;
+    int maxVelocityU, maxVelocityD, maxVelocityL, maxVelocityR;
+    int direction;
+    int step;
 
-    velocityX = 0;
-    velocityY = 0;
-    maxVelocityU = -100;
-    maxVelocityD = 100;
-    maxVelocityL = 100;
-    maxVelocityR = -100;
-    
-    timer = new javax.swing.Timer(20, this);
-    timer.start();
+    Block_1 block;
+    public PlatformerPanel ()
+    {
 
-    gravityTimer = new javax.swing.Timer(20, this);
-    gravityTimer.start();
-    
-    step = 2;
+	block = new Block_1 ();
+	block.setHeight (50);
+	block.setPosition (100, 150);
 
-    addKeyListener(this);
+	m = new UFO ();
+	m.setPosition (300, 50);
+	m.setColor (Color.red);
+	m.setSize (50);
+	direction = 0;
 
-  }
+	velocityX = 0;
+	velocityY = 0;
+	maxVelocityU = -100;
+	maxVelocityD = 100;
+	maxVelocityL = 100;
+	maxVelocityR = -100;
 
-  public void gravity ()
-  {
-    if (velocityY < 50)
-    {
-      velocityY = velocityY + 1;
-    }
-  }
-  public void move(char direction)
-  {
-    if (direction == 'L')
-    {
-      velocityX = -20;
-    }
-    else if (direction == 'R')
-    {
-      velocityX = 20;
-    }
-    else if (direction == 'S')
-    {
-        velocityX = 0;
-    }
-  }
+	timer = new javax.swing.Timer (20, this);
+	timer.start ();
 
-  public void paintComponent (Graphics g)
-  {
-  super.paintComponent(g);
-  if (step == 2)
-  m.draw(g);
-    requestFocus();
-  }
+	gravityTimer = new javax.swing.Timer (20, this);
+	gravityTimer.start ();
 
-  public void keyPressed (KeyEvent e)
-  {
-    if (e.getKeyChar() == 'w')
-    {
-      velocityY = -12;
+	step = 2;
 
-    }
-    if (e.getKeyChar() == 'd')
-    {
-      move('R');
-    }
-    else if (e.getKeyChar() == 'a')
-    {
-      move('L');
-    }
-    else if (e.getKeyChar() == 's')
-    {
+	addKeyListener (this);
 
     }
 
 
-
-  }
-
-
-  public void keyReleased (KeyEvent e)
-  {
-    if (e.getKeyChar() != 'w')
+    public void gravity ()
     {
-      move('S');
+	if (velocityY < 50)
+	{
+	    velocityY = velocityY + 1;
+	}
     }
 
-  }
 
-
-  public void keyTyped (KeyEvent e)
-  {
-
-  }
-
-  public void actionPerformed (ActionEvent e)
-  {
-    if (e.getSource() == timer)
+    public void move (char direction)
     {
-      if (m.getY() < 410)
-      {
-      m.setPosition(m.getX() + velocityX, m.getY() + velocityY);
-      }
-      else if (velocityY < 0)
-      {
-        m.setPosition(m.getX() + velocityX, m.getY() + velocityY);
-      }
-      else
-      {
-        m.setPosition(m.getX() + velocityX, m.getY());
-      }
-      //move('S');
-
-    }
-    if(e.getSource() == gravityTimer)
-    {
-
-      gravity();
+	if (direction == 'L')
+	{
+	    velocityX = -20;
+	}
+	else if (direction == 'R')
+	{
+	    velocityX = 20;
+	}
+	else if (direction == 'S')
+	{
+	    velocityX = 0;
+	}
     }
 
-    repaint();
-  }
+
+    public void paintComponent (Graphics g)
+    {
+	super.paintComponent (g);
+	if (step == 2)
+	    m.draw (g);
+	block.draw (g);
+	requestFocus ();
+    }
+
+
+    public void keyPressed (KeyEvent e)
+    {
+	if (e.getKeyChar () == 'w')
+	{
+	    velocityY = -12;
+
+	}
+	if (e.getKeyChar () == 'd')
+	{
+	    move ('R');
+	}
+	else if (e.getKeyChar () == 'a')
+	{
+	    move ('L');
+	}
+	else if (e.getKeyChar () == 's')
+	{
+
+	}
+
+
+
+    }
+
+
+    public void keyReleased (KeyEvent e)
+    {
+	if (e.getKeyChar () != 'w')
+	{
+	    move ('S');
+	}
+
+    }
+
+
+    public void keyTyped (KeyEvent e)
+    {
+
+    }
+
+
+    public void actionPerformed (ActionEvent e)
+    {
+	if (e.getSource () == timer)
+	{
+	    if (m.getY () < 410)
+	    {
+		m.setPosition (m.getX () + velocityX, m.getY () + velocityY);
+	    }
+	    else if (velocityY < 0)
+	    {
+		m.setPosition (m.getX () + velocityX, m.getY () + velocityY);
+	    }
+	    else
+	    {
+		m.setPosition (m.getX () + velocityX, m.getY ());
+	    }
+	    //move('S');
+
+	}
+	if (e.getSource () == gravityTimer)
+	{
+
+	    gravity ();
+	}
+
+	repaint ();
+    }
 }
