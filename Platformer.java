@@ -33,10 +33,6 @@ class PlatformerPanel extends JPanel implements KeyListener, ActionListener
     public PlatformerPanel ()
     {
 
-	block = new Block_1 ();
-	block.setHeight (50);
-	block.setPosition (100, 150);
-
 	m = new UFO ();
 	m.setPosition (300, 50);
 	m.setColor (Color.red);
@@ -57,6 +53,10 @@ class PlatformerPanel extends JPanel implements KeyListener, ActionListener
 	gravityTimer.start ();
 
 	step = 2;
+	
+	block = new Block_1 ();
+	block.setHeight (50);
+	block.setPosition (100, 150);
 
 	addKeyListener (this);
 
