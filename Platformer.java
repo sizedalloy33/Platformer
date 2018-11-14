@@ -19,7 +19,7 @@ public class Platformer
     }
 }
 
-class PlatformerPanel extends JPanel implements KeyListener, ActionListener
+class PlatformerPanel extends JPanel implements KeyListener, ActionListener, MouseListener
 {
   private javax.swing.Timer timer;
   private javax.swing.Timer gravityTimer;
@@ -28,6 +28,8 @@ class PlatformerPanel extends JPanel implements KeyListener, ActionListener
   int maxVelocityU, maxVelocityD, maxVelocityL, maxVelocityR;
   int direction;
   int step;
+  
+  ImageShape play;
   
   Block_1 block;
   
@@ -52,13 +54,19 @@ class PlatformerPanel extends JPanel implements KeyListener, ActionListener
     gravityTimer = new javax.swing.Timer(50, this);
     gravityTimer.start();
 
-    step = 2;
+    step = 1;
 
     block = new Block_1 ();
 	  block.setHeight (50);
 	  block.setPosition (100, 150);
+	  
+	  play = new ImageShape();
+	  play.setPicture("buttons/play1.png");
+	  play.setHeight (50);
+	  play.setPosition (100, 100);
 
     addKeyListener(this);
+    addMouseListener(this);
 
   }
 
@@ -88,8 +96,15 @@ class PlatformerPanel extends JPanel implements KeyListener, ActionListener
   public void paintComponent (Graphics g)
   {
   super.paintComponent(g);
+  if (step == 1)
+  {
+  play.draw (g);
+  }
+  else if (step == 2)
+  {
   m.draw(g);
   block.draw(g);
+  }
     requestFocus();
   }
 
@@ -158,5 +173,29 @@ class PlatformerPanel extends JPanel implements KeyListener, ActionListener
     }
 
     repaint();
+  }
+  
+  public void mouseClicked (MouseEvent e)
+  {
+  if (play.contains (e.getX(), e.getY()))
+  {
+  step = 2;
+  }
+  }
+  
+  public void mousePressed (MouseEvent e)
+  {
+  
+  }
+  
+  public void mouseReleased (MouseEvent e)
+  {
+  }
+  public void mouseEntered (MouseEvent e)
+  {
+  }
+  
+  public void mouseExited (MouseEvent e)
+  {
   }
 }
