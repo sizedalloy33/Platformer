@@ -29,7 +29,6 @@ class PlatformerPanel extends JPanel implements KeyListener, ActionListener
     int direction;
     int step;
 
-    Block_1 block;
     public PlatformerPanel ()
     {
 
