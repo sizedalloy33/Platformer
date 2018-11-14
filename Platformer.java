@@ -42,13 +42,13 @@ class PlatformerPanel extends JPanel implements KeyListener, ActionListener
     maxVelocityD = 100;
     maxVelocityL = 100;
     maxVelocityR = -100;
-    
+
     timer = new javax.swing.Timer(20, this);
     timer.start();
 
-    gravityTimer = new javax.swing.Timer(20, this);
+    gravityTimer = new javax.swing.Timer(50, this);
     gravityTimer.start();
-    
+
     step = 2;
 
     addKeyListener(this);
@@ -90,7 +90,7 @@ class PlatformerPanel extends JPanel implements KeyListener, ActionListener
   {
     if (e.getKeyChar() == 'w')
     {
-      velocityY = -12;
+      velocityY = -11;
 
     }
     if (e.getKeyChar() == 'd')
@@ -140,9 +140,8 @@ class PlatformerPanel extends JPanel implements KeyListener, ActionListener
       }
       else
       {
-        m.setPosition(m.getX() + velocityX, m.getY());
+        m.setPosition(m.getX() + velocityX, 410);
       }
-      //move('S');
 
     }
     if(e.getSource() == gravityTimer)
