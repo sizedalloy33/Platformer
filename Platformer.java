@@ -19,7 +19,7 @@ public class Platformer
     }
 }
 
-class PlatformerPanel extends JPanel implements KeyListener, ActionListener
+class PlatformerPanel extends JPanel implements KeyListener, ActionListener, MouseListener
 {
   private javax.swing.Timer timer;
   private javax.swing.Timer gravityTimer;
@@ -28,8 +28,11 @@ class PlatformerPanel extends JPanel implements KeyListener, ActionListener
   int maxVelocityU, maxVelocityD, maxVelocityL, maxVelocityR;
   int direction;
   int step;
+  
+  ImageShape play;
+  
   boolean onBlock;
-
+  
   Block_1 block;
 
   public PlatformerPanel ()
@@ -53,15 +56,21 @@ class PlatformerPanel extends JPanel implements KeyListener, ActionListener
     gravityTimer = new javax.swing.Timer(50, this);
     gravityTimer.start();
 
-    step = 2;
+    step = 1;
 
     block = new Block_1 ();
 	  block.setHeight (50);
 	  block.setPosition (100, 150);
 
     onBlock = false;
+    
+    play = new ImageShape();
+    play.setPicture("buttons/play1.png");
+    play.setHeight (50);
+    play.setPosition (100, 100);
 
     addKeyListener(this);
+    addMouseListener(this);
 
   }
 
