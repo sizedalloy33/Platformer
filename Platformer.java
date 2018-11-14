@@ -31,8 +31,10 @@ class PlatformerPanel extends JPanel implements KeyListener, ActionListener, Mou
   
   ImageShape play;
   
-  Block_1 block;
+  boolean onBlock;
   
+  Block_1 block;
+
   public PlatformerPanel ()
   {
     m = new UFO();
@@ -59,11 +61,13 @@ class PlatformerPanel extends JPanel implements KeyListener, ActionListener, Mou
     block = new Block_1 ();
 	  block.setHeight (50);
 	  block.setPosition (100, 150);
-	  
-	  play = new ImageShape();
-	  play.setPicture("buttons/play1.png");
-	  play.setHeight (50);
-	  play.setPosition (100, 100);
+
+    onBlock = false;
+    
+    play = new ImageShape();
+    play.setPicture("buttons/play1.png");
+    play.setHeight (50);
+    play.setPosition (100, 100);
 
     addKeyListener(this);
     addMouseListener(this);
@@ -72,20 +76,31 @@ class PlatformerPanel extends JPanel implements KeyListener, ActionListener, Mou
 
   public void gravity ()
   {
-    if (velocityY < 50)
+    if (velocityY < 20)
     {
       velocityY = velocityY + 1;
+    }
+  }
+  public void wall(int y, int x)
+  {
+    if (m.getY() >= y - 40 && m.getY() <= y && m.getX() >= x - 30 && m.getX() <= x + 50 && velocityY > 0)
+    {
+      onBlock = true;
+    }
+    else
+    {
+      onBlock = false;
     }
   }
   public void move(char direction)
   {
     if (direction == 'L')
     {
-      velocityX = -20;
+      velocityX = -10;
     }
     else if (direction == 'R')
     {
-      velocityX = 20;
+      velocityX = 10;
     }
     else if (direction == 'S')
     {
@@ -96,15 +111,8 @@ class PlatformerPanel extends JPanel implements KeyListener, ActionListener, Mou
   public void paintComponent (Graphics g)
   {
   super.paintComponent(g);
-  if (step == 1)
-  {
-  play.draw (g);
-  }
-  else if (step == 2)
-  {
   m.draw(g);
   block.draw(g);
-  }
     requestFocus();
   }
 
@@ -112,7 +120,7 @@ class PlatformerPanel extends JPanel implements KeyListener, ActionListener, Mou
   {
     if (e.getKeyChar() == 'w')
     {
-      velocityY = -11;
+      velocityY = -6;
 
     }
     if (e.getKeyChar() == 'd')
@@ -152,13 +160,18 @@ class PlatformerPanel extends JPanel implements KeyListener, ActionListener, Mou
   {
     if (e.getSource() == timer)
     {
-      if (m.getY() < 410)
+
+      if (m.getY() < 410 && onBlock == false)
       {
       m.setPosition(m.getX() + velocityX, m.getY() + velocityY);
       }
-      else if (velocityY < 0)
+      else if (velocityY < 0 && onBlock == false)
       {
         m.setPosition(m.getX() + velocityX, m.getY() + velocityY);
+      }
+      else if (onBlock == true)
+      {
+        m.setPosition(m.getX() + velocityX, m.getY());
       }
       else
       {
@@ -168,34 +181,34 @@ class PlatformerPanel extends JPanel implements KeyListener, ActionListener, Mou
     }
     if(e.getSource() == gravityTimer)
     {
-
+      wall (block.getY(), block.getX());
       gravity();
     }
 
     repaint();
   }
-  
-  public void mouseClicked (MouseEvent e)
-  {
-  if (play.contains (e.getX(), e.getY()))
-  {
-  step = 2;
-  }
-  }
-  
-  public void mousePressed (MouseEvent e)
-  {
-  
-  }
-  
-  public void mouseReleased (MouseEvent e)
-  {
-  }
-  public void mouseEntered (MouseEvent e)
-  {
-  }
-  
-  public void mouseExited (MouseEvent e)
-  {
+   	
+  public void mouseClicked (MouseEvent e)	
+  {	
+  if (play.contains (e.getX(), e.getY()))	
+  {	
+  step = 2;	
+  }	
+  }	
+  	
+  public void mousePressed (MouseEvent e)	
+  {	
+  	
+  }	
+  	
+  public void mouseReleased (MouseEvent e)	
+  {	
+  }	
+  public void mouseEntered (MouseEvent e)	
+  {	
+  }	
+  	
+  public void mouseExited (MouseEvent e)	
+  {	
   }
 }
