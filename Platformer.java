@@ -28,6 +28,9 @@ class PlatformerPanel extends JPanel implements KeyListener, ActionListener
   int maxVelocityU, maxVelocityD, maxVelocityL, maxVelocityR;
   int direction;
   int step;
+  
+  Block_1 block;
+  
   public PlatformerPanel ()
   {
     m = new UFO();
