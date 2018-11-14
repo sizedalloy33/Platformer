@@ -178,4 +178,28 @@ class PlatformerPanel extends JPanel implements KeyListener, ActionListener
 
     repaint();
   }
+   	
+  public void mouseClicked (MouseEvent e)	
+  {	
+  if (play.contains (e.getX(), e.getY()))	
+  {	
+  step = 2;	
+  }	
+  }	
+  	
+  public void mousePressed (MouseEvent e)	
+  {	
+  	
+  }	
+  	
+  public void mouseReleased (MouseEvent e)	
+  {	
+  }	
+  public void mouseEntered (MouseEvent e)	
+  {	
+  }	
+  	
+  public void mouseExited (MouseEvent e)	
+  {	
+  }
 }
