@@ -46,7 +46,7 @@ class PlatformerPanel extends JPanel implements KeyListener, ActionListener
     timer = new javax.swing.Timer(20, this);
     timer.start();
 
-    gravityTimer = new javax.swing.Timer(70, this);
+    gravityTimer = new javax.swing.Timer(20, this);
     gravityTimer.start();
     
     step = 2;
