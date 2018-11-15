@@ -35,6 +35,8 @@ class PlatformerPanel extends JPanel implements KeyListener, ActionListener, Mou
   boolean onBlock, onSide;
 
   Block_1 block;
+  
+  enemy d;
 
   public PlatformerPanel ()
   {
@@ -57,11 +59,11 @@ class PlatformerPanel extends JPanel implements KeyListener, ActionListener, Mou
     gravityTimer = new javax.swing.Timer(50, this);
     gravityTimer.start();
 
-    step = 2;
+    step = 1;
 
     block = new Block_1 ();
-	  block.setHeight (50);
-	  block.setPosition (100, 150);
+	  block.setHeight (150);
+	  block.setPosition (300, 300);
 
     onBlock = false;
     onSide = false;
