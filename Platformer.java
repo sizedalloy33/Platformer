@@ -45,6 +45,10 @@ class PlatformerPanel extends JPanel implements KeyListener, ActionListener, Mou
     m.setColor (Color.red);
     m.setSize(50);
     direction = 0;
+    
+    d = new enemy ();	
+d.setPosition (450, 50);	
+d.setHeight (50);
 
     velocityX = 0;
     velocityY = 0;
@@ -62,16 +66,16 @@ class PlatformerPanel extends JPanel implements KeyListener, ActionListener, Mou
     step = 1;
 
     block = new Block_1 ();
-	  block.setHeight (150);
-	  block.setPosition (300, 300);
+	  block.setHeight (50);
+	  block.setPosition (100, 150);
 
     onBlock = false;
     onSide = false;
 
     play = new ImageShape();
     play.setPicture("buttons/play1.png");
-    play.setHeight (50);
-    play.setPosition (100, 100);
+    play.setHeight (150);
+    play.setPosition (300, 300);
 
     addKeyListener(this);
     addMouseListener(this);
