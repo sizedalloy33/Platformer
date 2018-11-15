@@ -35,13 +35,20 @@ class PlatformerPanel extends JPanel implements KeyListener, ActionListener, Mou
 
     Block_1 block;
 
+    enemy d;
+
     public PlatformerPanel ()
     {
 	m = new UFO ();
 	m.setPosition (300, 50);
 	m.setColor (Color.red);
 	m.setSize (50);
+
 	direction = 0;
+
+	d = new enemy ();
+	d.setPosition (450, 50);
+	d.setHeight (50);
 
 	velocityX = 0;
 	velocityY = 0;
@@ -125,6 +132,7 @@ class PlatformerPanel extends JPanel implements KeyListener, ActionListener, Mou
 	{
 	    m.draw (g);
 	    block.draw (g);
+	    d.draw (g);
 	}
 	requestFocus ();
     }
