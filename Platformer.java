@@ -38,8 +38,13 @@ class PlatformerPanel extends JPanel implements KeyListener, ActionListener, Mou
 
     enemy d;
 
+    boolean collision;
+
     public PlatformerPanel ()
     {
+
+	collision = false;
+
 	m = new UFO ();
 	m.setPosition (300, 50);
 	m.setColor (Color.red);
@@ -198,6 +203,11 @@ class PlatformerPanel extends JPanel implements KeyListener, ActionListener, Mou
 	    block.draw (g);
 	    d.draw (g);
 	}
+	else if (step == 3)
+	{
+
+	}
+
 	requestFocus ();
     }
 
@@ -294,7 +304,7 @@ class PlatformerPanel extends JPanel implements KeyListener, ActionListener, Mou
 	    {
 		d.setPosition (d.getX () + dvelocityX, d.getY () + dvelocityY);
 	    }
-	    else if (velocityY < 0 && donBlock == false && donSide == false)
+	    else if (dvelocityY < 0 && donBlock == false && donSide == false)
 	    {
 		d.setPosition (d.getX () + dvelocityX, d.getY () + dvelocityY);
 	    }
@@ -310,6 +320,14 @@ class PlatformerPanel extends JPanel implements KeyListener, ActionListener, Mou
 	    {
 		d.setPosition (d.getX () + dvelocityX, 410);
 	    }
+
+	    if (m.getX () == d.getX () && m.getY () == d.getY ())
+	    {
+		collision = true;
+	    }
+
+	    if (collision)
+		step = 3;
 
 	}
 	if (e.getSource () == gravityTimer)
