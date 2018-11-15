@@ -42,4 +42,12 @@ public class Block_1
 
 	y = newy;
     }
+    public int getX()
+    {
+      return x;
+    }
+    public int getY()
+    {
+      return y;
+    }
 }
