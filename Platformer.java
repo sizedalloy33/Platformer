@@ -133,13 +133,14 @@ d.setHeight (50);
   {
     if (step == 1)
     {
-
+	play.draw(g);
     }
     else if (step == 2)
     {
       super.paintComponent(g);
       m.draw(g);
       block.draw(g);
+      d.draw(g);
     }
     requestFocus();
   }
