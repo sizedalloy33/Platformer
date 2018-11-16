@@ -278,8 +278,13 @@ class PlatformerPanel extends JPanel implements KeyListener, ActionListener, Mou
 
     public void actionPerformed (ActionEvent e)
     {
+
+
 	if (e.getSource () == timer)
 	{
+
+	    d.setAngle (6);
+	    d.move (2);
 
 	    if (m.getY () < 410 && onBlock == false && onSide == false)
 	    {
@@ -326,6 +331,7 @@ class PlatformerPanel extends JPanel implements KeyListener, ActionListener, Mou
 	    if (d.collision (m.getX (), m.getY ()))
 	    {
 		collision = true;
+		
 	    }
 
 	    if (collision)
@@ -360,7 +366,7 @@ class PlatformerPanel extends JPanel implements KeyListener, ActionListener, Mou
 
     public void mouseClicked (MouseEvent e)
     {
-	if (step == 1 && play.contains (e.getX (), e.getY ()))
+	if (play.contains (e.getX (), e.getY ()))
 	{
 	    step = 2;
 	}
