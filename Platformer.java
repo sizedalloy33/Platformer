@@ -192,20 +192,22 @@ class PlatformerPanel extends JPanel implements KeyListener, ActionListener, Mou
 
     public void paintComponent (Graphics g)
     {
+	super.paintComponent (g);
+
 	if (step == 1)
 	{
 	    play.draw (g);
 	}
 	else if (step == 2)
 	{
-	    super.paintComponent (g);
+
 	    m.draw (g);
 	    block.draw (g);
 	    d.draw (g);
 	}
 	else if (step == 3)
 	{
-
+	    play.draw (g);
 	}
 
 	requestFocus ();
@@ -321,7 +323,7 @@ class PlatformerPanel extends JPanel implements KeyListener, ActionListener, Mou
 		d.setPosition (d.getX () + dvelocityX, 410);
 	    }
 
-	    if (m.getX () == d.getX () && m.getY () == d.getY ())
+	    if (d.collision (m.getX (), m.getY ()))
 	    {
 		collision = true;
 	    }
