@@ -57,4 +57,16 @@ public class enemy
     {
 	return y;
     }
+
+
+    public boolean collision (int cx, int cy)
+    {
+
+	if (cx == x && cy == y)
+	    return true;
+
+	else
+	    return false;
+
+    }
 }
