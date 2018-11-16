@@ -9,6 +9,7 @@ public class enemy
 
     private int h;
     private int x, y;
+    private double angle;
 
     public enemy ()
     {
@@ -16,6 +17,7 @@ public class enemy
 	h = 50;
 	x = 200;
 	y = 200;
+	angle = 0;
 
     }
 
@@ -68,5 +70,27 @@ public class enemy
 	else
 	    return false;
 
+    }
+
+
+    public void setAngle (double newAngle)
+    {
+	angle = newAngle;
+    }
+
+
+    public double getAngle ()
+    {
+	return angle;
+    }
+
+
+    public void move (int distance)
+    {
+	int dx = (int) (distance * Math.cos (angle));
+	int dy = (int) (distance * Math.sin (angle));
+
+	x = x + dx;
+	y = y - dy;
     }
 }
