@@ -37,6 +37,8 @@ class PlatformerPanel extends JPanel implements KeyListener, ActionListener, Mou
     Block_1 block;
 
     enemy d;
+    
+    coin c;
 
     boolean collision;
 
@@ -54,6 +56,8 @@ class PlatformerPanel extends JPanel implements KeyListener, ActionListener, Mou
 	d = new enemy ();
 	d.setPosition (450, 50);
 	d.setHeight (50);
+	
+	c = new Coin
 
 	velocityX = 0;
 	velocityY = 0;
