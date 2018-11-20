@@ -57,7 +57,7 @@ class PlatformerPanel extends JPanel implements KeyListener, ActionListener, Mou
 	d.setPosition (450, 50);
 	d.setHeight (50);
 	
-	c = new Coin
+	c = new coin();
 
 	velocityX = 0;
 	velocityY = 0;
@@ -208,6 +208,7 @@ class PlatformerPanel extends JPanel implements KeyListener, ActionListener, Mou
 	    m.draw (g);
 	    block.draw (g);
 	    d.draw (g);
+	    c.draw (g);
 	}
 	else if (step == 3)
 	{
