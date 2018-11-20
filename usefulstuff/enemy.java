@@ -71,6 +71,17 @@ public class enemy
 	    return false;
 
     }
+    public void bounce ()
+    {
+      if (angle == 0)
+      {
+         angle = 3.14;
+      }
+      else
+      {
+         angle = 0;
+      }
+   }
 
 
     public void setAngle (double newAngle)
