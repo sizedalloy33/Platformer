@@ -38,16 +38,12 @@ class PlatformerPanel extends JPanel implements KeyListener, ActionListener, Mou
 
     enemy d;
 
-    coin c;
-
     boolean collision;
 
     public PlatformerPanel ()
     {
 
 	collision = false;
-
-	c = new coin ();
 
 	m = new UFO ();
 	m.setPosition (300, 50);
@@ -208,7 +204,6 @@ class PlatformerPanel extends JPanel implements KeyListener, ActionListener, Mou
 	    m.draw (g);
 	    block.draw (g);
 	    d.draw (g);
-	    c.draw (g);
 	}
 	else if (step == 3)
 	{
@@ -288,8 +283,16 @@ class PlatformerPanel extends JPanel implements KeyListener, ActionListener, Mou
 	if (e.getSource () == timer)
 	{
 
-	    d.setAngle (6);
-	    d.move (2);
+
+	    d.move (4);
+       if (d.getX() >= 740)
+       {
+          d.bounce();
+       }
+       else if(d.getX() <= 0)
+       {
+          d.bounce();
+       }
 
 	    if (m.getY () < 410 && onBlock == false && onSide == false)
 	    {
