@@ -75,7 +75,7 @@ public class enemy
     {
       if (angle == 0)
       {
-         angle = 3.14;
+         angle = Math.PI;
       }
       else
       {
