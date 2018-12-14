@@ -37,7 +37,7 @@ class PlatformerPanel extends JPanel implements KeyListener, ActionListener, Mou
     Block_1 block;
 
     enemy d;
-    
+
     coin c;
 
     boolean collision;
@@ -56,8 +56,8 @@ class PlatformerPanel extends JPanel implements KeyListener, ActionListener, Mou
 	d = new enemy ();
 	d.setPosition (450, 50);
 	d.setHeight (50);
-	
-	c = new coin();
+
+	c = new coin ();
 
 	velocityX = 0;
 	velocityY = 0;
@@ -69,7 +69,7 @@ class PlatformerPanel extends JPanel implements KeyListener, ActionListener, Mou
 	maxVelocityR = -100;
 
 	timer = new javax.swing.Timer (20, this);
-	timer.start ();
+	// timer.start ();
 
 	gravityTimer = new javax.swing.Timer (50, this);
 	gravityTimer.start ();
@@ -290,14 +290,14 @@ class PlatformerPanel extends JPanel implements KeyListener, ActionListener, Mou
 
 
 	    d.move (4);
-       if (d.getX() >= 740)
-       {
-          d.bounce();
-       }
-       else if(d.getX() <= 0)
-       {
-          d.bounce();
-       }
+	    if (d.getX () >= 740)
+	    {
+		d.bounce ();
+	    }
+	    else if (d.getX () <= 0)
+	    {
+		d.bounce ();
+	    }
 
 	    if (m.getY () < 410 && onBlock == false && onSide == false)
 	    {
@@ -348,7 +348,14 @@ class PlatformerPanel extends JPanel implements KeyListener, ActionListener, Mou
 	    }
 
 	    if (collision)
+	    {
 		step = 3;
+		timer.stop ();
+
+		m.setPosition (300, 50);
+
+		d.setPosition (450, 50);
+	    }
 
 	}
 	if (e.getSource () == gravityTimer)
@@ -381,7 +388,9 @@ class PlatformerPanel extends JPanel implements KeyListener, ActionListener, Mou
     {
 	if (play.contains (e.getX (), e.getY ()))
 	{
+	    collision = false;
 	    step = 2;
+	    timer.start ();
 	}
     }
 
