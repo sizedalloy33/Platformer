@@ -71,17 +71,19 @@ public class enemy
 	    return false;
 
     }
+
+
     public void bounce ()
     {
-      if (angle == 0)
-      {
-         angle = Math.PI;
-      }
-      else
-      {
-         angle = 0;
-      }
-   }
+	if (angle == 0)
+	{
+	    angle = Math.PI;
+	}
+	else
+	{
+	    angle = 0;
+	}
+    }
 
 
     public void setAngle (double newAngle)

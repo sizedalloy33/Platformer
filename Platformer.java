@@ -175,25 +175,6 @@ class PlatformerPanel extends JPanel implements KeyListener, ActionListener, Mou
     }
 
 
-    public void dmove (char direction)
-    {
-
-
-	if (direction == 'L')
-	{
-	    dvelocityX = -10;
-	}
-	else if (direction == 'R')
-	{
-	    dvelocityX = 10;
-	}
-	else if (direction == 'S')
-	{
-	    dvelocityX = 0;
-	}
-    }
-
-
     public void paintComponent (Graphics g)
     {
 	super.paintComponent (g);
@@ -239,24 +220,6 @@ class PlatformerPanel extends JPanel implements KeyListener, ActionListener, Mou
 
 	}
 
-	// if (e.getKeyChar () == 'w')
-	// {
-	//     dvelocityY = -10;
-	//
-	// }
-	// if (e.getKeyChar () == 'd')
-	// {
-	//     dmove ('R');
-	// }
-	// else if (e.getKeyChar () == 'a')
-	// {
-	//     dmove ('L');
-	// }
-	// else if (e.getKeyChar () == 's')
-	// {
-	//
-	// }
-
     }
 
 
@@ -266,12 +229,6 @@ class PlatformerPanel extends JPanel implements KeyListener, ActionListener, Mou
 	{
 	    move ('S');
 	}
-
-	if (e.getKeyChar () != 'w')
-	{
-	    dmove ('S');
-	}
-
     }
 
 
@@ -290,6 +247,7 @@ class PlatformerPanel extends JPanel implements KeyListener, ActionListener, Mou
 
 
 	    d.move (4);
+
 	    if (d.getX () >= 740)
 	    {
 		d.bounce ();
@@ -355,6 +313,8 @@ class PlatformerPanel extends JPanel implements KeyListener, ActionListener, Mou
 		m.setPosition (300, 50);
 
 		d.setPosition (450, 50);
+
+		d.setAngle (0);
 	    }
 
 	}
