@@ -61,18 +61,6 @@ public class enemy
     }
 
 
-    public boolean collision (int cx, int cy)
-    {
-
-	if (cx == x && cy == y)
-	    return true;
-
-	else
-	    return false;
-
-    }
-
-
     public void bounce ()
     {
 	if (angle == 0)
@@ -105,5 +93,14 @@ public class enemy
 
 	x = x + dx;
 	y = y - dy;
+    }
+
+
+    public boolean contains (int ptX, int ptY)
+    {
+	if ((x < ptX && ptX < x + h) && (y < ptY && ptY < y + h))
+	    return true;
+	else
+	    return false;
     }
 }

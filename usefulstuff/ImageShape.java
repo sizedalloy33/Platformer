@@ -129,7 +129,7 @@ public class ImageShape
     /**
      * Sets the height of a ImageShape
      *
-     * @param  newh   new height of the ImageShape 
+     * @param  newh   new height of the ImageShape
      */
     public void setHeight (int newh)
     {
@@ -147,11 +147,11 @@ public class ImageShape
 	return height;
     }
 
-    
+
     /**
      * Sets the size (height & width) of a ImageShape
      *
-     * @param  newh   new height of the ImageShape 
+     * @param  newh   new height of the ImageShape
      */
     public void setSize (int newh)
     {
@@ -161,7 +161,22 @@ public class ImageShape
 
     public boolean contains (int pointX, int pointY)
     {
-    if (x < pointX && pointX < x + height && y < pointY && pointY < y + height)
+	if (x < pointX && pointX < x + height && y < pointY && pointY < y + height)
+	    return true;
+	else
+	    return false;
+    }
+
+
+    public boolean collide (enemy v)
+    {
+	if (contains (v.getX (), v.getY ()))
+	    return true;
+	else if (contains (v.getX () + v.getHeight (), v.getY ()))
+	    return true;
+	else if (v.contains (x, y)
+		return true;
+	else if (v.contains (x + h, y))
 	    return true;
 	else
 	    return false;
