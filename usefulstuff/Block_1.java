@@ -21,7 +21,7 @@ public class Block_1
     public void draw (Graphics g)
     {
 	    g.setColor (Color.black);
-	    g.fillRect (x, y, h, w);
+	    g.fillRect (x, y, w, h);
     }
 
 
