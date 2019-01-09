@@ -170,14 +170,44 @@ public class ImageShape
 
     public boolean collide (enemy v)
     {
-	if (contains (v.getX (), v.getY ()))
+	if (this.contains (v.getX (), v.getY ()))
 	    return true;
-	else if (contains (v.getX () + v.getHeight (), v.getY ()))
+	else if (this.contains (v.getX () + v.getHeight (), v.getY ()))
 	    return true;
-	else if (v.contains (x, y)
+  else if (this.contains(v.getX(), v.getY() + v.getHeight()))
+      return true;
+  else if (this.contains(v.getX() + v.getHeight(), v.getY() + v.getHeight()))
+      return true;
+	else if (v.contains (x, y))
 		return true;
-	else if (v.contains (x + h, y))
+	else if (v.contains (x + height, y))
 	    return true;
+  else if (v.contains (x, y + height))
+    	return true;
+  else if (v.contains (x + height, y + height))
+    	return true;
+	else
+	    return false;
+    }
+
+    public boolean collide (Block_1 b)
+    {
+	if (this.contains (b.getX (), b.getY ()))
+	    return true;
+	else if (this.contains (b.getX () + b.getHeight (), b.getY ()))
+	    return true;
+  else if (this.contains(b.getX(), b.getY() + b.getHeight()))
+      return true;
+  else if (this.contains(b.getX() + b.getHeight(), b.getY() + b.getHeight()))
+      return true;
+	else if (b.contains (x, y))
+		return true;
+	else if (b.contains (x + height, y))
+	    return true;
+  else if (b.contains (x, y + height))
+    	return true;
+  else if (b.contains (x + height, y + height))
+    	return true;
 	else
 	    return false;
     }
@@ -185,4 +215,3 @@ public class ImageShape
 
 
 } // ImageShape class
-

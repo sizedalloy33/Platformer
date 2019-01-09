@@ -23,7 +23,7 @@ class PlatformerPanel extends JPanel implements KeyListener, ActionListener, Mou
 {
     private javax.swing.Timer timer;
     private javax.swing.Timer gravityTimer;
-    UFO m;        //this is just so we can test some things
+    ImageShape m;        //this is just so we can test some things
     int velocityX, velocityY, dvelocityX, dvelocityY; // current velocity in each direction
     int maxVelocityU, maxVelocityD, maxVelocityL, maxVelocityR; // max velocitys in each direction
     int direction; // what direction the player is facing
@@ -47,10 +47,10 @@ class PlatformerPanel extends JPanel implements KeyListener, ActionListener, Mou
 
 	collision = false;
 
-	m = new UFO ();
+	m = new ImageShape ();
+  m.setPicture("usefulstuff/standleft.GIF");
 	m.setPosition (300, 300);
-	m.setColor (Color.red);
-	m.setSize (50);
+	m.setHeight (50);
 	direction = 0;
 
 	d = new enemy ();
@@ -262,7 +262,7 @@ class PlatformerPanel extends JPanel implements KeyListener, ActionListener, Mou
 		d.setPosition (d.getX () + dvelocityX, 410);
 	    }
 
-	    if (d.collision (m.getX (), m.getY ()))
+	    if (m.collide (d))
 	    {
 		collision = true;
 
@@ -283,13 +283,12 @@ class PlatformerPanel extends JPanel implements KeyListener, ActionListener, Mou
 	}
 	if (e.getSource () == gravityTimer)
 	{
-      if(block.collide(m)) {
-        onBlock = true;
-      }
-      else {
-        onBlock = false;
-      }
-	    wall (block.getY (), block.getX ());
+
+
+        if (m.collide(block))
+          onBlock = true;
+        else
+          onBlock = false;
 	    if (onBlock == false)
 	    {
 		gravity ();
