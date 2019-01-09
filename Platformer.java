@@ -24,21 +24,21 @@ class PlatformerPanel extends JPanel implements KeyListener, ActionListener, Mou
     private javax.swing.Timer timer;
     private javax.swing.Timer gravityTimer;
     UFO m;        //this is just so we can test some things
-    int velocityX, velocityY, dvelocityX, dvelocityY;
-    int maxVelocityU, maxVelocityD, maxVelocityL, maxVelocityR;
-    int direction;
-    int step;
-    int mX, mY;
+    int velocityX, velocityY, dvelocityX, dvelocityY; // current velocity in each direction
+    int maxVelocityU, maxVelocityD, maxVelocityL, maxVelocityR; // max velocitys in each direction
+    int direction; // what direction the player is facing
+    int step; //what stage the game is on
+    int mX, mY; //?
 
-    ImageShape play;
+    ImageShape play; // play button
 
-    boolean onBlock, onSide, donBlock, donSide;
+    boolean onBlock, onSide, donBlock, donSide; // to keep track of if the player or enemy is on the block
 
-    Block_1 block;
+    Block_1 block; // the test block for the player to stand on
 
-    enemy d;
+    enemy d; // the first enemy
 
-    coin c;
+    coin c; // A coin for the player to interact with
 
     boolean collision;
 
@@ -48,7 +48,7 @@ class PlatformerPanel extends JPanel implements KeyListener, ActionListener, Mou
 	collision = false;
 
 	m = new UFO ();
-	m.setPosition (300, 50);
+	m.setPosition (300, 300);
 	m.setColor (Color.red);
 	m.setSize (50);
 	direction = 0;
@@ -77,8 +77,8 @@ class PlatformerPanel extends JPanel implements KeyListener, ActionListener, Mou
 	step = 1;
 
 	block = new Block_1 ();
-	block.setHeight (50);
-	block.setPosition (100, 150);
+	block.setDimentions (70, 30);
+	block.setPosition (150, 150);
 
 	onBlock = false;
 	onSide = false;
@@ -96,63 +96,26 @@ class PlatformerPanel extends JPanel implements KeyListener, ActionListener, Mou
 
     public void gravity ()
     {
-	if (velocityY < 20)
-	{
-	    velocityY = velocityY + 1;
-	}
+      if (velocityY < 20)
+	    {
+        velocityY = velocityY + 1;
+	    }
 
-	if (dvelocityY < 20)
-	{
-	    dvelocityY = dvelocityY + 1;
-	}
+	    if (dvelocityY < 20)
+	    {
+	      dvelocityY = dvelocityY + 1;
+	    }
     }
 
 
     public void wall (int y, int x)
     {
-	mX = m.getX ();
-	mY = m.getY ();
-	if (mY >= y - 40 && mY <= y && mX >= x - 30 && mX <= x + 50 && velocityY > 0)
-	{
-	    onBlock = true;
-	    m.setPosition (mX, y - 40);
-	}
-	else if (mY <= y + 40 && mY >= y && velocityY < 0 && mX >= x - 30 && mX <= x + 50)
-	{
-	    onBlock = true;
-	    m.setPosition (mX, y + 40);
-	}
-	else if (mX >= x && mX <= x + 40 && velocityX < 0 && velocityX < 0 && mY < y + 40 && mY > y - 40)
-	{
-	    onSide = true;
-	}
-	else
-	{
-	    onBlock = false;
-	    onSide = false;
-	}
-
-	mX = d.getX ();
-	mY = d.getY ();
-	if (mY >= y - 40 && mY <= y && mX >= x - 30 && mX <= x + 50 && dvelocityY > 0)
-	{
-	    donBlock = true;
-	    d.setPosition (mX, y - 40);
-	}
-	else if (mY <= y + 40 && mY >= y && dvelocityY < 0 && mX >= x - 30 && mX <= x + 50)
-	{
-	    donBlock = true;
-	    d.setPosition (mX, y + 40);
-	}
-	else if (mX >= x && mX <= x + 40 && dvelocityX < 0 && dvelocityX < 0 && mY < y + 40 && mY > y - 40)
-	{
-	    donSide = true;
-	}
-	else
-	{
-	    donBlock = false;
-	    donSide = false;
-	}
+	    mX = m.getX ();
+	    mY = m.getY ();
+      if (block.contains(mX, mY) && velocityX <= 0)
+        onBlock = true;
+      else
+        onBlock = false;
     }
 
 
@@ -320,6 +283,12 @@ class PlatformerPanel extends JPanel implements KeyListener, ActionListener, Mou
 	}
 	if (e.getSource () == gravityTimer)
 	{
+      if(block.collide(m)) {
+        onBlock = true;
+      }
+      else {
+        onBlock = false;
+      }
 	    wall (block.getY (), block.getX ());
 	    if (onBlock == false)
 	    {
