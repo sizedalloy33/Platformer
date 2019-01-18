@@ -183,9 +183,9 @@ public class ImageShape
 	else if (v.contains (x + height, y))
 	    return true;
   else if (v.contains (x, y + height))
-    	return true;
+	return true;
   else if (v.contains (x + height, y + height))
-    	return true;
+	return true;
 	else
 	    return false;
     }
@@ -205,9 +205,31 @@ public class ImageShape
 	else if (b.contains (x + height, y))
 	    return true;
   else if (b.contains (x, y + height))
-    	return true;
+	return true;
   else if (b.contains (x + height, y + height))
-    	return true;
+	return true;
+	else
+	    return false;
+    }
+    
+    public boolean collide (coin c)
+    {
+	if (this.contains (c.getX (), c.getY ()))
+	    return true;
+	else if (this.contains (c.getX () + c.getHeight (), c.getY ()))
+	    return true;
+  else if (this.contains(c.getX(), c.getY() + c.getHeight()))
+      return true;
+  else if (this.contains(c.getX() + c.getHeight(), c.getY() + c.getHeight()))
+      return true;
+	else if (c.contains (x, y))
+		return true;
+	else if (c.contains (x + height, y))
+	    return true;
+  else if (c.contains (x, y + height))
+	return true;
+  else if (c.contains (x + height, y + height))
+	return true;
 	else
 	    return false;
     }
