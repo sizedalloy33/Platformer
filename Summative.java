@@ -32,7 +32,7 @@ class SummativePanal extends JPanel implements KeyListener, ActionListener, Mous
     int gravitySpeed; //The speed of the gravity timer
     ImageShape play; //The play button
     boolean plOnBlock; //Boolean variable that shows if player 1 is on a block
-    Block_1 block; //The block for the players to stand on and interact with
+    Block_1 block, block2, block3, block4, block5, block6, block7, block8, block9, block10, block11; //The block for the players to stand on and interact with
     coin coin1; //The coin for the player to collect
     int CoinX, CoinY;
 
@@ -47,7 +47,7 @@ class SummativePanal extends JPanel implements KeyListener, ActionListener, Mous
 	gravitySpeed = 20; //Sets the starting speed of the gravity timer
 
 	enemy1 = new enemy ();
-	enemy1.setPosition (450, 300); //Sets the starting position of enemy 1
+	enemy1.setPosition (450, 880); //Sets the starting position of enemy 1
 	enemy1.setHeight (50); //Sets the size of enemy 1
 	e1Direction = 0; //Sets the starting direction of enemy 1
 	e1VelocityX = 0; //Sets the starting speed of the enemy
@@ -63,7 +63,39 @@ class SummativePanal extends JPanel implements KeyListener, ActionListener, Mous
 
 	block = new Block_1 (); //Creates the block
 	block.setDimentions (1350, 30); //Sets the dimentions of the block
-	block.setPosition (0, 730); //Sets the position of the block
+	block.setPosition (0, 930); //Sets the position of the block
+  block2 = new Block_1 (); //Creates the block
+	block2.setDimentions (400, 30); //Sets the dimentions of the block
+	block2.setPosition (80, 630); //Sets the position of the block
+  block3 = new Block_1 (); //Creates the block
+	block3.setDimentions (400, 30); //Sets the dimentions of the block
+	block3.setPosition (80, 780); //Sets the position of the block
+  block4 = new Block_1 (); //Creates the block
+	block4.setDimentions (400, 30); //Sets the dimentions of the block
+	block4.setPosition (80, 480); //Sets the position of the block
+  block5 = new Block_1 (); //Creates the block
+	block5.setDimentions (400, 30); //Sets the dimentions of the block
+	block5.setPosition (80, 330); //Sets the position of the block
+  block6 = new Block_1 (); //Creates the block
+	block6.setDimentions (400, 30); //Sets the dimentions of the block
+	block6.setPosition (80, 180); //Sets the position of the block
+  block7 = new Block_1 (); //Creates the block
+	block7.setDimentions (400, 30); //Sets the dimentions of the block
+	block7.setPosition (850, 480); //Sets the position of the block
+  block8 = new Block_1 (); //Creates the block
+	block8.setDimentions (400, 30); //Sets the dimentions of the block
+	block8.setPosition (850, 780); //Sets the position of the block
+  block9 = new Block_1 (); //Creates the block
+	block9.setDimentions (400, 30); //Sets the dimentions of the block
+	block9.setPosition (850, 630); //Sets the position of the block
+  block10 = new Block_1 (); //Creates the block
+	block10.setDimentions (400, 30); //Sets the dimentions of the block
+	block10.setPosition (850, 330); //Sets the position of the block
+  block11 = new Block_1 (); //Creates the block
+	block11.setDimentions (400, 30); //Sets the dimentions of the block
+	block11.setPosition (850, 180); //Sets the position of the block
+
+
 
 	play = new ImageShape (); //Creates the play button
 	play.setPicture ("buttons/play1.png");
@@ -95,6 +127,16 @@ class SummativePanal extends JPanel implements KeyListener, ActionListener, Mous
 	    block.draw (g); //Draw the block
 	    enemy1.draw (g); //Draws enemy 1
 	    coin1.draw (g); //Draw the coin
+      block2.draw (g); //Draw the block
+      block3.draw (g); //Draw the block
+      block4.draw (g); //Draw the block
+      block5.draw (g); //Draw the block
+      block6.draw (g); //Draw the block
+      block7.draw (g); //Draw the block
+      block8.draw (g);
+      block9.draw (g);
+      block10.draw (g);
+      block11.draw (g);
 
 	}
 	else if (step == 3) //Checks if the game step is 3 and if it is then show the end screen and the replay button
@@ -107,9 +149,9 @@ class SummativePanal extends JPanel implements KeyListener, ActionListener, Mous
 
     public void keyPressed (KeyEvent e)
     {
-	if (e.getKeyChar () == 'w' || e.getKeyCode () == KeyEvent.VK_SPACE) //Checks if the player presses w or spaceBar
+	if (e.getKeyChar () == 'w' && p1VelocityY == 0 || e.getKeyCode () == KeyEvent.VK_SPACE && p1VelocityY == 0) //Checks if the player presses w or spaceBar
 	{
-	    p1VelocityY = -25; //Sets the players Y velocity to -10
+	    p1VelocityY = -27; //Sets the players Y velocity to -10
 	    gravitySpeed = 30; //Sets the speed of the gravity timer to 60
 	}
 	if (e.getKeyChar () == 'd') //Checks if the player presses d
@@ -162,7 +204,7 @@ class SummativePanal extends JPanel implements KeyListener, ActionListener, Mous
 		timer.stop (); //Stops the timer
 		gravityTimer.stop (); //Stops the gravity timer
 		player1.setPosition (300, 50); //Resets the player position
-		enemy1.setPosition (450, 300); //Resets the enemy position
+		enemy1.setPosition (450, 880); //Resets the enemy position
 		enemy1.setAngle (0); //Resets the enemys movement angle
 		CoinX = (int) (Math.random () * 800 + 100);
 
@@ -175,19 +217,24 @@ class SummativePanal extends JPanel implements KeyListener, ActionListener, Mous
 	    {
 		coin1.setPosition (CoinX, CoinY);
 
-		CoinX = (int) (Math.random () * 800 + 100);
+		CoinX = (int) (Math.random () * 900 + 100);
 
-		CoinY = (int) (Math.random () * 650 + 100);
+		CoinY = (int) (Math.random () * 800 + 100);
 	    }
 	}
 
 	if (e.getSource () == gravityTimer) //Checks for when the gravity timer tics
 	{
-	    if (player1.collide (block) && p1VelocityY >= 0) //Checks to see if the player is colliding wiht the block or if it is on the bottom of the screen
+	    if (player1.collide (block) && p1VelocityY >= 0 || player1.collide (block2) && p1VelocityY >= 0 || player1.collide (block3) && p1VelocityY >= 0 || player1.collide (block4) && p1VelocityY >= 0 || player1.collide (block5) && p1VelocityY >= 0 || player1.collide (block6) && p1VelocityY >= 0 )
 	    {
 		p1VelocityY = 0;
 		gravitySpeed = 30;
 	    }
+      else if (player1.collide (block7) && p1VelocityY >= 0 || player1.collide (block8) && p1VelocityY >= 0 || player1.collide (block9) && p1VelocityY >= 0 || player1.collide (block10) && p1VelocityY >= 0 || player1.collide (block11) && p1VelocityY >= 0)
+      {
+        p1VelocityY = 0;
+    		gravitySpeed = 30;
+      }
 	    else
 	    {
 		p1Gravity (); //Calls the gravity function if the player is not on the bottom of the screen
