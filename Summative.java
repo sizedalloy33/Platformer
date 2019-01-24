@@ -63,16 +63,18 @@ class SummativePanal extends JPanel implements KeyListener, ActionListener, Mous
 
 	block = new Block_1 (); //Creates the block
 	block.setDimentions (1350, 30); //Sets the dimentions of the block
-	block.setPosition (0, 930); //Sets the position of the block
+	block.setPosition (0, 730); //Sets the position of the block
 
 	play = new ImageShape (); //Creates the play button
 	play.setPicture ("buttons/play1.png");
 	play.setHeight (150);
 	play.setPosition (300, 300);
 
-	CoinX = (int) (Math.random () * 1200 + 100);
+	CoinX = (int) (Math.random () * 800 + 100);
 
-	CoinY = (int) (Math.random () * 800 + 200);
+	CoinY = (int) (Math.random () * 650 + 100);
+
+	coin1.setPosition (CoinX, CoinY);
 
 	addKeyListener (this); //Adds the key listener
 	addMouseListener (this); //Adds the mouse listener
@@ -105,7 +107,7 @@ class SummativePanal extends JPanel implements KeyListener, ActionListener, Mous
 
     public void keyPressed (KeyEvent e)
     {
-	if (e.getKeyChar () == 'w') //Checks if the player presses w
+	if (e.getKeyChar () == 'w' || e.getKeyCode () == KeyEvent.VK_SPACE) //Checks if the player presses w or spaceBar
 	{
 	    p1VelocityY = -25; //Sets the players Y velocity to -10
 	    gravitySpeed = 30; //Sets the speed of the gravity timer to 60
@@ -137,7 +139,23 @@ class SummativePanal extends JPanel implements KeyListener, ActionListener, Mous
 	    if (enemy1.getX () >= 1250 || enemy1.getX () <= 0) //Checks if the enemy has collided with the edge of the screen
 		enemy1.bounce (); //Calls the enemys bounce function
 
-	    player1.setPosition (player1.getX () + p1VelocityX, player1.getY ()); //Moves the player along the x axis
+	    if (player1.getX () == 0 || player1.getX () == 1280)
+	    {
+		if (player1.getX () == 0)                   // seeing if the player has moved off screen on the right
+		{
+		    player1.setPosition (10, player1.getY ());        // stoping player from going off screen
+		}
+		else if (player1.getX () == 1280)               // seeing if the player has moved off screen on the right
+		{
+		    player1.setPosition (1250, player1.getY ());     // stoping player from going off screen
+		}
+	    }
+	    else
+	    {
+
+		player1.setPosition (player1.getX () + p1VelocityX, player1.getY ()); //Moves the player along the x axis
+	    }
+
 	    if (player1.collide (enemy1)) //Checks if the player has collided with the enemy
 	    {
 		step = 3; //Sets the game step to 3
@@ -146,15 +164,20 @@ class SummativePanal extends JPanel implements KeyListener, ActionListener, Mous
 		player1.setPosition (300, 50); //Resets the player position
 		enemy1.setPosition (450, 300); //Resets the enemy position
 		enemy1.setAngle (0); //Resets the enemys movement angle
+		CoinX = (int) (Math.random () * 800 + 100);
+
+		CoinY = (int) (Math.random () * 650 + 100);
+
+		coin1.setPosition (CoinX, CoinY);               // Moves the coin randomly
 	    }
 
 	    if (player1.collide (coin1))
 	    {
 		coin1.setPosition (CoinX, CoinY);
 
-		CoinX = (int) (Math.random () * 1200 + 700);
+		CoinX = (int) (Math.random () * 800 + 100);
 
-		CoinY = (int) (Math.random () * 800 + 500);
+		CoinY = (int) (Math.random () * 650 + 100);
 	    }
 	}
 
