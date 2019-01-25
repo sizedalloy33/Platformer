@@ -72,7 +72,7 @@ class SummativePanal extends JPanel implements KeyListener, ActionListener, Mous
 
 	CoinX = (int) (Math.random () * 800 + 100);
 
-	CoinY = (int) (Math.random () * 650 + 100);
+	CoinY = (int) (Math.random () * 600 + 100);
 
 	coin1.setPosition (CoinX, CoinY);
 
@@ -166,7 +166,7 @@ class SummativePanal extends JPanel implements KeyListener, ActionListener, Mous
 		enemy1.setAngle (0); //Resets the enemys movement angle
 		CoinX = (int) (Math.random () * 800 + 100);
 
-		CoinY = (int) (Math.random () * 650 + 100);
+		CoinY = (int) (Math.random () * 600 + 100);
 
 		coin1.setPosition (CoinX, CoinY);               // Moves the coin randomly
 	    }
@@ -177,7 +177,7 @@ class SummativePanal extends JPanel implements KeyListener, ActionListener, Mous
 
 		CoinX = (int) (Math.random () * 800 + 100);
 
-		CoinY = (int) (Math.random () * 650 + 100);
+		CoinY = (int) (Math.random () * 600 + 100);
 	    }
 	}
 
